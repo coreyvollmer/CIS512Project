@@ -1,1 +1,1 @@
-print("lol")
+print("CIS 512")
