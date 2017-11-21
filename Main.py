@@ -5,7 +5,7 @@ def Main():
     reader = CSVReader
     #print(reader.getNYLineCount())
     #CDI = [dict() for x in range(reader.getNYLineCount())]
-    #CDI.append("poop")
+    #CDI.append("test")
     #reader.printNLines(10)
     reader.csvWriter()
 if __name__ == "__main__":
