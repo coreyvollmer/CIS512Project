@@ -1,4 +1,4 @@
-
+#This is the file from lecture on 11/20.
 #imported as example from https://stackoverflow.com/questions/22611446/perform-2-sample-t-test
 import dataframe as df
 import numpy as np
