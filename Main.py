@@ -21,11 +21,16 @@ def Main():
     #cdiReader.NYfileWriter()
 
     #Print out each unique question
-    cdiReader.printUniqueColumnValues(6)
+    #cdiReader.printUniqueColumnValues(7)
 
     #read CSV/NCAO-BRFSS.csv and print cleaned non null lines.
-    brfReader.readAndPrint()
+    #brfReader.readAndPrint()
 
+    #brfReader.printValuableLines()
+
+    #brfReader.printUniqueColumnValues(10)
+    brfReader.writeCleanedCSVFile()
+    #brfReader.printTopTenPercentColumns()
     # create variables for doing analysis
     #CDI = [dict() for x in range(reader.getNYLineCount())]
     #CDI.append("test")
