@@ -16,8 +16,8 @@ class BRFReader:
 
 
 def writeCleanedCSVFile():
-    with open(cleanDataSetPath, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile, delimiter=' ', quotechar=' ', quoting=csv.QUOTE_MINIMAL, dialect='excel')
+    with open(cleanDataSetPath, 'w', newline='') as writecsvfile:
+        writer = csv.writer(writecsvfile, delimiter=' ', quotechar="'", quoting=csv.QUOTE_NONE, escapechar=' ')
         #writer = csv.writer(csvfile, delimiter=' ', quotechar='"', quoting=csv.QUOTE_NONE, esc')
         rowCount = 0
         fileCounter = 0
@@ -25,28 +25,31 @@ def writeCleanedCSVFile():
             reader = csv.reader(csvfile, delimiter=',', quotechar='"')
             for row in reader:
                 fileCounter = fileCounter + 1
-                semiCleanedRow = ', '.join(row)
+                semiCleanedRow = ','.join(row)
                 semiCleanedRowCells = semiCleanedRow.split(",")
+                #print(semiCleanedRowCells)
                 if semiCleanedRowCells[2].__contains__("NY") or fileCounter==1:
                     if not semiCleanedRow.__contains__("****"):  # skip lines with insufficient data
+
                         rowCount = rowCount + 1
-                        print(semiCleanedRowCells[1].strip)
                         #var which holds selected rows
-                        rowSelection = (semiCleanedRowCells[1].strip()+","+ # YearEnd
-                                        semiCleanedRowCells[2].strip()+","+ # LocationAbbr
-                                        semiCleanedRowCells[5]+","+ # Class
-                                        semiCleanedRowCells[6]+","+ # Topic
-                                        semiCleanedRowCells[7]+","+ # Question
-                                        semiCleanedRowCells[8] + "," + # Data_Value_Unit
-                                        semiCleanedRowCells[9] + "," + # Data_Value_Type
-                                        semiCleanedRowCells[11] + "," + #
-                                        semiCleanedRowCells[12] + "," +  #
-                                        semiCleanedRowCells[13] + "," + #
-                                        semiCleanedRowCells[14] + "," +  #
-                                        semiCleanedRowCells[15] + "," +  #
-                                        semiCleanedRowCells[16] + ",")  #
-                        writer.
-                        print(rowCount)
+                        rowSelection = (semiCleanedRowCells[1].strip()+" "+ # YearEnd
+                                        semiCleanedRowCells[2].strip()+" "+ # LocationAbbr
+                                        semiCleanedRowCells[5].strip()+","+ # Class
+                                        semiCleanedRowCells[6].strip()+","+ # Topic
+                                        semiCleanedRowCells[7].strip()+","+ # Question
+                                        semiCleanedRowCells[8].strip()+ "," + # Data_Value_Unit
+                                        semiCleanedRowCells[9].strip()+ "," + # Data_Value_Type
+                                        semiCleanedRowCells[11].strip()+ "," + #
+                                        semiCleanedRowCells[12].strip()+ "," +  #
+                                        semiCleanedRowCells[13].strip()+ "," + #
+                                        semiCleanedRowCells[14].strip()+ "," +  #
+                                        semiCleanedRowCells[15].strip()+ "," +  #
+                                        semiCleanedRowCells[16].strip()+ ",")  #
+                        print(rowSelection)
+                        #writer.writerow(rowSelection)
+                        #print(rowCount)
+
 
 
 
@@ -72,7 +75,7 @@ def readAndPrint():
 
 
 def printValuableLines():
-    rowLimiter=10
+    rowLimiter=100
     rowCount = 0
     fileCounter = 0
     with open('CSV/NPAO-BRFSS.csv', newline='') as csvfile:
@@ -84,10 +87,22 @@ def printValuableLines():
             if semiCleanedRowCells[2].__contains__("NY") or fileCounter == 1:
                 if not semiCleanedRow.__contains__("****"):  # skip lines with insufficient data
 
-                    selectedColumns=semiCleanedRowCells[1] +" |_| "+ semiCleanedRowCells[2] +" |_| "+ semiCleanedRowCells[5] +" |_| "+ semiCleanedRowCells[6] +" |_| "+ semiCleanedRowCells[7]  +" |_| "+ semiCleanedRowCells[9] +" |_| "+ semiCleanedRowCells[10] + " |_| "
-                    if(rowLimiter>rowCount):
-                        print(selectedColumns)
-                        rowCount = rowCount + 1
+                    if (semiCleanedRowCells[32].__contains__("OVR") or fileCounter == 1): # Only consider lines with overall statistics
+                        rowSelection = (semiCleanedRowCells[1].strip() + "," +  # YearEnd
+                                    semiCleanedRowCells[2].strip() + "," +  # LocationAbbr
+                                  # semiCleanedRowCells[5].strip() + "," +  # Class
+                                  # semiCleanedRowCells[6].strip() + "," +  # Topic
+                                    semiCleanedRowCells[7].strip() + "," +  # Question
+                                  # semiCleanedRowCells[8].strip() + "," +  # Data_Value_Unit
+                                  # semiCleanedRowCells[9].strip() + "," +  # Data_Value_Type
+                                    semiCleanedRowCells[10].strip() + "," +  # data_value
+                                    semiCleanedRowCells[14].strip() + "," +  # low confidence limit
+                                    semiCleanedRowCells[15].strip() + "," +  # High confidence limit
+                                    semiCleanedRowCells[16].strip()) # Sample Size
+
+                        if(rowLimiter>rowCount):
+                            print("Row "+str(rowCount)+": "+rowSelection)
+                            rowCount = rowCount + 1
 
 def printUniqueColumnValues(colNum):
     seenVals = []

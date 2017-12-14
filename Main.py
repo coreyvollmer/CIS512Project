@@ -16,20 +16,37 @@ def Main():
     cdiReader = CDIReader
     brfReader = BRFReader
 
+    #This function prints row details that show a relatively easy to read view of only overall statistics about health habits
+    #Many rows contain subset data which are not as valuable as overall
+    #Row count, Year,State,Question,Data Value,Low Confidence Limit, High Confidence Limit, Sample Size
+
+    print("Behavioral Risk Factor Surveillance Survey Analysis Results:")
+    brfReader.printValuableLines()
+    print("---")
+    print("End of BRFSS")
+    print("---")
+
+    #This function prints row details on overall activity limiting conditions
+
+    print("Chronic Disease Indicator Analysis Results:")
+    cdiReader.printOverallNYRows()
 
     #write cleaned NY File, non null, non repeated cells from original dataset
     #cdiReader.NYfileWriter()
 
     #Print out each unique question
-    #cdiReader.printUniqueColumnValues(7)
+    #cdiReader.printUniqueColumnValues(6)
+
+
+
 
     #read CSV/NCAO-BRFSS.csv and print cleaned non null lines.
     #brfReader.readAndPrint()
 
-    #brfReader.printValuableLines()
+
 
     #brfReader.printUniqueColumnValues(10)
-    brfReader.writeCleanedCSVFile()
+    #brfReader.writeCleanedCSVFile()
     #brfReader.printTopTenPercentColumns()
     # create variables for doing analysis
     #CDI = [dict() for x in range(reader.getNYLineCount())]
