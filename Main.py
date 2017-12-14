@@ -53,7 +53,8 @@ def Main():
     #CDI.append("test")
 
     end = time.time() #mark end time of main execution and then report
-    print("Executed in "+ str(end - start) + " seconds.")
+
+    print("Executed in "+ str(round(end - start,3)) + " seconds.")
 
 #This starts Main program execution
 if __name__ == "__main__":
