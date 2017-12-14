@@ -129,9 +129,9 @@ def printOverallNYRows():
                                         semiCleanedRowCells[8] + "," +  # DataValueUnit
                                         semiCleanedRowCells[9] + "," +  # DataValueType
                                         semiCleanedRowCells[10] + "," +  # DataValue
-                                    #    semiCleanedRowCells[11] + "," +  # DataValueFootnoteSymbol
-                                  #      semiCleanedRowCells[12] + "," +  # DataValueFootnote
-                                    #    semiCleanedRowCells[13] + "," +  # DataValueFootnote
+                                      # semiCleanedRowCells[11] + "," +  # DataValueAlt (this is the same as DataValue, what a waste of space)
+                                      # semiCleanedRowCells[12] + "," +  # DataValueFootnoteSymbol
+                                      # semiCleanedRowCells[13] + "," +  # DataValueFootnote
                                         semiCleanedRowCells[14] + "," +  # LowConfidenceLimit
                                         semiCleanedRowCells[15] + "," +  # HighConfidenceLimit
                                         semiCleanedRowCells[16] + ",")  # StratificationCategory1
