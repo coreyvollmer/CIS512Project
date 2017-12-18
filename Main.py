@@ -7,38 +7,23 @@
 # Version: 0.03
 # Last Updated: 11/27/2017
 #
-import CDIReader, BRFReader #Created classes for functions
+import CDI_Functions, BRF_Functions, CPS_Functions #Created classes for functions
 import time
+
+cdiObject = CDI_Functions
+brfObject = BRF_Functions
+cpsObject = CPS_Functions
 
 def Main():
     start = time.time() #start global execution timer
 
-    cdiReader = CDIReader
-    brfReader = BRFReader
-
-    #This function prints row details that show a relatively easy to read view of only overall statistics about health habits
-    #Many rows contain subset data which are not as valuable as overall
-    #Row count, Year,State,Question,Data Value,Low Confidence Limit, High Confidence Limit, Sample Size
-
-    print("Behavioral Risk Factor Surveillance Survey Analysis Results:")
-    brfReader.printValuableLines()
-    print("---")
-    print("End of BRFSS")
-    print("---")
-
-    #This function prints row details on overall activity limiting conditions
-
-    print("Chronic Disease Indicator Analysis Results:")
-    cdiReader.printOverallNYRows()
-
-    #write cleaned NY File, non null, non repeated cells from original dataset
-    #cdiReader.NYfileWriter()
-
-    #Print out each unique question
-    #cdiReader.printUniqueColumnValues(6)
+    #insert calls into call list, use key
+    # "brfpvl" =  Prints row details that show a relatively easy to read view of only overall statistics about health habits
+    # "cdiponyr" = prints row details on overall activity limiting conditions
 
 
-
+    callList = ("brfpvl","cdiponyr");
+    functionCallListHandler(callList);
 
     #read CSV/NCAO-BRFSS.csv and print cleaned non null lines.
     #brfReader.readAndPrint()
@@ -57,5 +42,25 @@ def Main():
     print("Executed in "+ str(round(end - start,3)) + " seconds.")
 
 #This starts Main program execution
+
+
+def functionCallListHandler(callList):
+    for call in callList:
+        if(call=="brfpvl"):
+            # This function prints row details that show a relatively easy to read view of only overall statistics about health habits
+            # Many rows contain subset data which are not as valuable as overall
+            # Row count, Year,State,Question,Data Value,Low Confidence Limit, High Confidence Limit, Sample Size
+            print("Behavioral Risk Factor Surveillance Survey Overall Analysis Results:")
+            brfObject.printValuableLines()
+            print("---")
+            print("End of 'brfpvl' call")
+            print("---")
+        if(call=="cdiponyr"):
+            print("Chronic Disease Indicator Analysis Results:")
+            cdiObject.printOverallNYRows()
+            print("---")
+            print("End of 'cdiponyr' call.")
+            print("---")
+
 if __name__ == "__main__":
     Main()
