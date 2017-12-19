@@ -188,6 +188,8 @@ class cdiDatum():
         self.lowConfidenceLimit = LowConfidenceLimit
         self.highConfidenceLimit = HighConfidenceLimit
 
+
+
 #This function prints all rows with column values matching the function arguments
 def printAllMatchingRows(colNum, colVal):
     fileCounter = 0

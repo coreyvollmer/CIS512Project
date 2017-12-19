@@ -9,6 +9,7 @@
 #
 import CDI_Functions, BRF_Functions, CPS_Functions #Created classes for functions
 import time
+import pandas
 
 cdiObject = CDI_Functions
 brfObject = BRF_Functions
@@ -20,14 +21,23 @@ cdiObjectList = []
 def Main():
     start = time.time() #start global execution timer
 
-    #insert calls into call list, use key
+    #insert calls into call list, use this key.
     # "brfpvl" =  Prints row details that show a relatively easy to read view of only overall statistics about health habits
+
     # "cdiponyr" = prints row details on overall activity limiting conditions
+    # "cdirivl" = read cdi csv file and creates a list of class objects
+
     # "cpsriv" = reads cps csv file and creates a list of class objects
+
 
     #callList = ("brfpvl","cdiponyr");
     callList = ("cdirivl","cpsrivl");
 
+    #Fix error if list is of size  1.
+    if(len(callList) == 1):
+        callList.append("")
+
+    #This function runs list of functions declared above.
     functionCallListHandler(callList);
 
     #print(cpsObjectList[0].name)
