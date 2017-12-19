@@ -8,7 +8,7 @@
 #
 # Corey Vollmer's CIS 512 Project
 # Version: 0.03
-# Last Updated: 11/27/2017
+# Last Updated: 12/19/2017
 #
 import CDI_Functions, BRF_Functions, CPS_Functions #Created classes for functions
 import time, pandas, matplotlib.pyplot as plt
