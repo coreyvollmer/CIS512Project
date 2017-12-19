@@ -1,5 +1,5 @@
-YearEnd,LocationAbbr,Question,Data_Value,Low_Confidence_Limit,High_Confidence_Limit,Sample_Size
-2011,NY,Percent of adults who engage in no leisure-time physical activity,26.3,24.9,27.7,7276
+YearEnd,LocationAbbr,Question,DataValue,LowConfidenceLimit,HighConfidenceLimit,SampleSize
+2011,NY,Percent of adults no leisure-time physical activity,26.3,24.9,27.7,7276
 2011,NY,Percent of adults aged 18 years and older who have obesity,24.5,23.2,25.9,7222
 2011,NY,Percent of adults aged 18 years and older who have an overweight classification,35.8,34.3,37.4,7222
 2011,NY,Percent of adults who report consuming fruit less than one time daily,33.9,32.4,35.5,7165

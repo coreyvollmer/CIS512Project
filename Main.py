@@ -7,7 +7,6 @@
 #cost data https://www.bls.gov/cps/tables.htm
 #
 # Corey Vollmer's CIS 512 Project
-# Version: 0.03
 # Last Updated: 12/19/2017
 #
 import CDI_Functions, BRF_Functions, CPS_Functions #Created classes for functions
@@ -24,33 +23,30 @@ brfObjectList = []
 
 def Main():
     start = time.time() #start global execution timer
-
-    #insert calls into call list, use this dictionary below
-
+    #
+    # insert calls into call list, use this dictionary below
+#   #   #
     # "brfpvl" =  prints row details that show a relatively easy to read view of only overall statistics about health habits
-
+#   #   #
     # "cdiponyr" = prints row details on overall activity limiting conditions
     # "cdirivl" = read cdi csv file and creates a list of class objects
     # "cdippala" = makes a scatter plot for crude prevalence of arthritis over time
     # "cdippalphd" = makes a scatter plot for crude prevalence of COPD over time
     # "cdipral" = makes a bar graph showing mean percentage of recent activity limitations by year
-
-    # "cpsriv" = reads cps csv file and creates a list of class objects
-
+#   #   #
+    # "cpsrivl" = reads cps csv file and creates a list of class objects
+    # "cpsrip" = reads into pandas
+    #   #
     #callList = ("brfpvl","cdiponyr");
     #callList = ("cdirivl","cpsrivl","cdipi");
-    callList = ["brfpvl"]
-    #callList = ["cdiponyr"]
-
-    brfObject.pandas()
+    callList = ["brfpvl","cdiponyr","cdippala","cdippalphd","cdipral","cpsrivl"]
 
     #Fix error if list is of size  1.
     if(len(callList) == 1):
         callList.append("")
 
-    data = cpsObjectList
     #This function runs list of functions declared above.
-    #functionCallListHandler(callList)
+    functionCallListHandler(callList)
 
     end = time.time() #mark end time of main execution and then report
 
@@ -66,6 +62,11 @@ def functionCallListHandler(callList):
             brfObject.printValuableLines()
             print("End of 'brfpvl' call")
 
+        if (call == "brfpsvl"):
+            print("Behavioral Risk Factor Surveillance Survey Overall Analysis Results:")
+            brfObject.printSimplifiedValuableLines()
+            print("End of 'brfpsvl' call")
+
         if(call=="cdiponyr"):
             print("Chronic Disease Indicator Analysis Results:")
             cdiObject.printOverallNYRows()
@@ -80,24 +81,25 @@ def functionCallListHandler(callList):
             print("")
             cdiObject.pandasPlotActLimArthritis()
             print("End of 'cdippala' call.")
-        print("---")
 
         if (call == "cdippalphd"):
             print("")
             cdiObject.pandasPlotActLimPHD()
             print("End of 'cdippalphd' call.")
-        print("---")
 
         if (call == "cdipral"):
             print("")
             cdiObject.pandasPlotRecActLim()
             print("End of 'cdipral' call.")
-        print("---")
 
         if(call=="cpsrivl"):
             print("Reading CPS and populating a list of class objects")
             cpsObjectList = cpsObject.readIntoVarList()
             print("End of 'cpsrivl' call.")
+
+        if (call == "cpsrip"):
+            print("Reading CPS and populating a list of class objects")
+            print("End of 'cpsrip' call.")
         print("---")
 
 #This starts Main program execution

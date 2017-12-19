@@ -1,5 +1,5 @@
 import Main
-import csv
+import csv, pandas
 
 def readAndPrint():
     rowCount = 0
@@ -11,6 +11,11 @@ def readAndPrint():
             semiCleanedRowCells = semiCleanedRow.split(",")
             fileCounter = fileCounter + 1
             print(semiCleanedRow)
+
+def readIntoPandas():
+    data = pandas.read_csv("CSV/BLS-CPS.csv", error_bad_lines=False)
+    print(data.axes)
+    print(data)
 
 def readIntoVarList():
     fileCounter = 0

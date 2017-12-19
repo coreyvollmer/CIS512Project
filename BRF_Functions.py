@@ -14,7 +14,7 @@ cleanDataSetPath="CSV/BRFSS-Clean.csv"
 class BRFReader:
     print("BRF Reader Initialized. Running selected functions in Main...")
 
-
+#Depreciated
 def writeCleanedCSVFile():
     with open(cleanDataSetPath, 'w', newline='') as writecsvfile:
         writer = csv.writer(writecsvfile, delimiter=' ', quotechar="'", quoting=csv.QUOTE_NONE, escapechar=' ')
@@ -49,9 +49,6 @@ def writeCleanedCSVFile():
                         print(rowSelection)
                         #writer.writerow(rowSelection)
                         #print(rowCount)
-
-
-
 
 #prints out non null NY columns
 def readAndPrint():
@@ -88,7 +85,6 @@ def printValuableLines():
             fileCounter = fileCounter + 1
             if semiCleanedRowCells[2].__contains__("NY") or fileCounter == 1:
                 if not semiCleanedRow.__contains__("****"):  # skip lines with insufficient data
-
                     if (semiCleanedRowCells[32].__contains__("OVR") or fileCounter == 1): # Only consider lines with overall statistics
                         rowSelection = (semiCleanedRowCells[1].strip() + "," +  # YearEnd
                                     semiCleanedRowCells[2].strip() + "," +  # LocationAbbr
@@ -101,28 +97,12 @@ def printValuableLines():
                                     semiCleanedRowCells[14].strip() + "," +  # low confidence limit
                                     semiCleanedRowCells[15].strip() + "," +  # High confidence limit
                                     semiCleanedRowCells[16].strip()) # Sample Size
-
                         if(rowLimiter>rowCount):
-                            print(rowSelection)
-                           # print("Row "+str(rowCount)+": "+rowSelection)
+                           # print(rowSelection)
+                            print("Row "+str(rowCount)+": "+rowSelection)
                             rowCount = rowCount + 1
 
-def pandas():
-    data = pandas.read_csv("CSV/BRFSS-Cleaned_Subset.csv")
-    data = data[data[' Topic'] == " Arthritis"]
-    data = data[data[' DataValueType'] == " Crude Prevalence"]
-
-    plt.xlabel("Survey Year")
-    plt.ylabel("Crude Prevalence")
-    plt.title("Prevalence of Activity Limiting Arthritis")
-
-    #print(data.axes) #this row shows data column names, found missing leading spaces here
-    plt.scatter(data['YearStart'],data[' DataValue'])
-
-    plt.show()
-
-
-
+# This function will print rows that have not been repeated for the specified column argument
 def printUniqueColumnValues(colNum):
     seenVals = []
     rowCount = 0
@@ -139,7 +119,8 @@ def printUniqueColumnValues(colNum):
                         print(semiCleanedRowCells[colNum])
                         seenVals.append(semiCleanedRowCells[colNum])
 
-
+# This function is supposed to get a list of rows with the top percentages.
+# Does not work work correctly and has been depreciated
 def printTopTenPercentColumns():
     fileLineCounter = 0
     topColumns = []
@@ -152,28 +133,19 @@ def printTopTenPercentColumns():
             semiCleanedRowCells = semiCleanedRow.split(",")
             if semiCleanedRowCells[2].__contains__("NY"):
                 if not semiCleanedRow.__contains__("****"): #skip lines with insufficient data
-
                     if not(semiCleanedRowCells[10]):
-
                         #this section finds top percentages
-
                         if len(topPercentages)<10:
                             topPercentages.append(semiCleanedRowCells[10])
                             print("adding:"+semiCleanedRowCells[10])
                         else:
                             print("list is sufficiently big. testing:"+ semiCleanedRowCells[10])
-
                             for p in topPercentages:
                                 if p > semiCleanedRowCells[10]:
-
                                     print("replacing: "+topPercentages[0]+" with: "+semiCleanedRowCells[10])
                                     topPercentages[0] = semiCleanedRowCells[10]
                                     topPercentages.sort()
-
-
         fileLineCounter = fileLineCounter + 1
         topPercentages = topPercentages.sort()
         for top in topPercentages:
             print(top)
-
-
