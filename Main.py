@@ -26,7 +26,7 @@ def Main():
     # "cpsriv" = reads cps csv file and creates a list of class objects
 
     #callList = ("brfpvl","cdiponyr");
-    callList = ("cpsriv","");
+    callList = ("cdirivl","cpsrivl");
 
     functionCallListHandler(callList);
 
@@ -46,33 +46,27 @@ def Main():
 #This is the controller for handling runtime calls. This enables this program to have modular functionality
 def functionCallListHandler(callList):
     for call in callList:
+        print("---")
         if(call=="brfpvl"):
             print("Behavioral Risk Factor Surveillance Survey Overall Analysis Results:")
             brfObject.printValuableLines()
-            print("---")
             print("End of 'brfpvl' call")
-            print("---")
 
         if(call=="cdiponyr"):
             print("Chronic Disease Indicator Analysis Results:")
             cdiObject.printOverallNYRows()
-            print("---")
             print("End of 'cdiponyr' call.")
-            print("---")
 
         if (call == "cdirivl"):
-            print("---")
             print("Reading CDI and populating a list of class objects")
             cpsObjectList = cdiObject.readIntoVarList()
             print("End of 'cdiril' call.")
-            print("---")
 
         if(call=="cpsrivl"):
-            print("---")
             print("Reading CPS and populating a list of class objects")
             cpsObjectList = cpsObject.readIntoVarList()
             print("End of 'cpsriv' call.")
-            print("---")
+        print("---")
 
 #This starts Main program execution
 if __name__ == "__main__":

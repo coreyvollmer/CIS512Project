@@ -170,11 +170,13 @@ def readIntoVarList():
                                         semiCleanedRowCells[16] + ",")  # StratificationCategory1
                             objectList.append(cdiDatum(semiCleanedRowCells[0],semiCleanedRowCells[5],semiCleanedRowCells[6],
                                                        semiCleanedRowCells[8],semiCleanedRowCells[9],semiCleanedRowCells[10],
-                                                       semiCleanedRowCells[14],semiCleanedRowCells[15],semiCleanedRowCells[16]))
+                                                       semiCleanedRowCells[14],semiCleanedRowCells[15]))
                             #print("Row "+str(rowCount)+": "+rowSelection)
                             rowCount = rowCount + 1
     return objectList
 
+
+#This is a basic class with instance property variables for a row of data
 class cdiDatum():
     def __init__(self,YearStart, Topic, Question, DataValueUnit, DataValueType, DataValue, LowConfidenceLimit, HighConfidenceLimit):
         self.yearStart = YearStart
