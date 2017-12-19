@@ -3,7 +3,7 @@
 #CDI dataset from https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi-e50c9
 #Dataset is very large, so I made a smaller file which contains all columns with NY data, CSV/CDI-NY.csv
 
-import csv
+import csv, pandas, matplotlib.pyplot as plt
 
 #Full original dataset
 #Source: https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi-e50c9
@@ -32,6 +32,8 @@ def getNYLineCount():
                     # print(str(rowCount + 1) + ": " + semiCleanedRow)
                     rowCount = rowCount + 1
     return fileCounter
+
+
 
 def insertIntoCDI(cdiObject):
     cdiObject.append()
@@ -134,11 +136,10 @@ def printOverallNYRows():
                                       # semiCleanedRowCells[13] + "," +  # DataValueFootnote
                                         semiCleanedRowCells[14] + "," +  # LowConfidenceLimit
                                         semiCleanedRowCells[15] + "," +  # HighConfidenceLimit
-                                        semiCleanedRowCells[16] + ",")  # StratificationCategory1
-
-                            print("Row "+str(rowCount)+": "+rowSelection)
+                                        semiCleanedRowCells[16])  # StratificationCategory1
+                            print(rowSelection)
+                            #print("Row "+str(rowCount)+": "+rowSelection)
                             rowCount = rowCount + 1
-
 
 def readIntoVarList():
     rowCount = 0
@@ -167,7 +168,8 @@ def readIntoVarList():
                                       # semiCleanedRowCells[13] + "," +  # DataValueFootnote
                                         semiCleanedRowCells[14] + "," +  # LowConfidenceLimit
                                         semiCleanedRowCells[15] + "," +  # HighConfidenceLimit
-                                        semiCleanedRowCells[16] + ",")  # StratificationCategory1
+                                        semiCleanedRowCells[16])  # StratificationCategory1
+
                             objectList.append(cdiDatum(semiCleanedRowCells[0],semiCleanedRowCells[5],semiCleanedRowCells[6],
                                                        semiCleanedRowCells[8],semiCleanedRowCells[9],semiCleanedRowCells[10],
                                                        semiCleanedRowCells[14],semiCleanedRowCells[15]))
@@ -188,8 +190,6 @@ class cdiDatum():
         self.lowConfidenceLimit = LowConfidenceLimit
         self.highConfidenceLimit = HighConfidenceLimit
 
-
-
 #This function prints all rows with column values matching the function arguments
 def printAllMatchingRows(colNum, colVal):
     fileCounter = 0
@@ -199,3 +199,46 @@ def printAllMatchingRows(colNum, colVal):
             fileCounter = fileCounter + 1
             semiCleanedRow = ', '.join(row)
             semiCleanedRowCells = semiCleanedRow.split(",")
+
+
+def pandasPlotActLimArthritis():
+    data = pandas.read_csv("CSV/CDI-Cleaned_Subset.csv")
+    data = data[data[' Topic'] == " Arthritis"]
+    data = data[data[' DataValueType'] == " Crude Prevalence"]
+
+    plt.xlabel("Survey Year")
+    plt.ylabel("Crude Prevalence")
+    plt.title("Prevalence of Activity Limiting Arthritis")
+
+    #print(data.axes) #this row shows data column names, found missing leading spaces here
+    plt.scatter(data['YearStart'],data[' DataValue'])
+
+    plt.show()
+
+def pandasPlotActLimPHD():
+    data = pandas.read_csv("CSV/CDI-Cleaned_Subset.csv")
+    data = data[data[' Topic'] == " Chronic Obstructive Pulmonary Disease"]
+    data = data[data[' DataValueType'] == " Crude Prevalence"]
+
+    plt.xlabel("Survey Year")
+    plt.ylabel("Crude Prevalence")
+    plt.title("Prevalence of Activity Limiting Chronic Obstructive Pulmonary Disease")
+
+    # print(data.axes) #this row shows data column names, found missing leading spaces here
+    plt.scatter(data['YearStart'], data[' DataValue'])
+
+    plt.show()
+
+def pandasPlotRecActLim():
+    data = pandas.read_csv("CSV/CDI-Cleaned_Subset.csv")
+    data = data[data[' Topic'] == " Overarching Conditions"]
+    data = data[data[' DataValueType'] == " Mean"]
+
+    plt.xlabel("Survey Year")
+    plt.ylabel("Mean Percentage")
+    plt.title("Recent Activity Limitation Among Adults")
+
+    # print(data.axes) #this row shows data column names, found missing leading spaces here
+    plt.bar(data['YearStart'], data[' DataValue'])
+
+    plt.show()
