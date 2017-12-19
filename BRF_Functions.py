@@ -3,7 +3,7 @@
 # CSV Reader and documentation from: https://docs.python.org/3/library/csv.html
 # BRF dataset from https://catalog.data.gov/dataset/nutrition-physical-activity-and-obesity-behavioral-risk-factor-surveillance-system
 
-import csv
+import csv, pandas, matplotlib.pyplot as plt
 
 #Original dataset from web
 dataSetPath="CSV/NPAO-BRFSS.csv"
@@ -106,6 +106,22 @@ def printValuableLines():
                             print(rowSelection)
                            # print("Row "+str(rowCount)+": "+rowSelection)
                             rowCount = rowCount + 1
+
+def pandas():
+    data = pandas.read_csv("CSV/BRFSS-Cleaned_Subset.csv")
+    data = data[data[' Topic'] == " Arthritis"]
+    data = data[data[' DataValueType'] == " Crude Prevalence"]
+
+    plt.xlabel("Survey Year")
+    plt.ylabel("Crude Prevalence")
+    plt.title("Prevalence of Activity Limiting Arthritis")
+
+    #print(data.axes) #this row shows data column names, found missing leading spaces here
+    plt.scatter(data['YearStart'],data[' DataValue'])
+
+    plt.show()
+
+
 
 def printUniqueColumnValues(colNum):
     seenVals = []

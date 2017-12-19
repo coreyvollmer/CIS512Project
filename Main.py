@@ -42,13 +42,15 @@ def Main():
     callList = ["brfpvl"]
     #callList = ["cdiponyr"]
 
+    brfObject.pandas()
+
     #Fix error if list is of size  1.
     if(len(callList) == 1):
         callList.append("")
 
     data = cpsObjectList
     #This function runs list of functions declared above.
-    functionCallListHandler(callList)
+    #functionCallListHandler(callList)
 
     end = time.time() #mark end time of main execution and then report
 

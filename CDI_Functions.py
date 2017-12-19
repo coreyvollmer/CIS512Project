@@ -177,7 +177,6 @@ def readIntoVarList():
                             rowCount = rowCount + 1
     return objectList
 
-
 #This is a basic class with instance property variables for a row of data
 class cdiDatum():
     def __init__(self,YearStart, Topic, Question, DataValueUnit, DataValueType, DataValue, LowConfidenceLimit, HighConfidenceLimit):
