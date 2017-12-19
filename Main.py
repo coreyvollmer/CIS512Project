@@ -25,7 +25,8 @@ brfObjectList = []
 def Main():
     start = time.time() #start global execution timer
 
-    #insert calls into call list, use this key.
+    #insert calls into call list, use this dictionary below
+
     # "brfpvl" =  prints row details that show a relatively easy to read view of only overall statistics about health habits
 
     # "cdiponyr" = prints row details on overall activity limiting conditions
@@ -35,8 +36,6 @@ def Main():
     # "cdipral" = makes a bar graph showing mean percentage of recent activity limitations by year
 
     # "cpsriv" = reads cps csv file and creates a list of class objects
-    #
-
 
     #callList = ("brfpvl","cdiponyr");
     #callList = ("cdirivl","cpsrivl","cdipi");
@@ -98,8 +97,6 @@ def functionCallListHandler(callList):
             cpsObjectList = cpsObject.readIntoVarList()
             print("End of 'cpsrivl' call.")
         print("---")
-
-
 
 #This starts Main program execution
 if __name__ == "__main__":

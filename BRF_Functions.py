@@ -103,7 +103,8 @@ def printValuableLines():
                                     semiCleanedRowCells[16].strip()) # Sample Size
 
                         if(rowLimiter>rowCount):
-                            print("Row "+str(rowCount)+": "+rowSelection)
+                            print(rowSelection)
+                           # print("Row "+str(rowCount)+": "+rowSelection)
                             rowCount = rowCount + 1
 
 def printUniqueColumnValues(colNum):

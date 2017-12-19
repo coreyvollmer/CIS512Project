@@ -137,8 +137,8 @@ def printOverallNYRows():
                                         semiCleanedRowCells[14] + "," +  # LowConfidenceLimit
                                         semiCleanedRowCells[15] + "," +  # HighConfidenceLimit
                                         semiCleanedRowCells[16])  # StratificationCategory1
-                            print(rowSelection)
-                            #print("Row "+str(rowCount)+": "+rowSelection)
+                            #print(rowSelection)
+                            print("Row "+str(rowCount)+": "+rowSelection)
                             rowCount = rowCount + 1
 
 def readIntoVarList():
