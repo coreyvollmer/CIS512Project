@@ -3,7 +3,7 @@
 # CSV Reader and documentation from: https://docs.python.org/3/library/csv.html
 # BRF dataset from https://catalog.data.gov/dataset/nutrition-physical-activity-and-obesity-behavioral-risk-factor-surveillance-system
 
-import csv, re
+import csv
 
 #Original dataset from web
 dataSetPath="CSV/NPAO-BRFSS.csv"
@@ -73,7 +73,9 @@ def readAndPrint():
                         #print(rowCount) # 1009 NY Lines
                         rowCount = rowCount + 1
 
-
+# This function prints row details that show a relatively easy to read view of only overall statistics about health habits
+#  Many rows contain subset data which are not as valuable as overall
+# Row count, Year,State,Question,Data Value,Low Confidence Limit, High Confidence Limit, Sample Size
 def printValuableLines():
     rowLimiter=100
     rowCount = 0

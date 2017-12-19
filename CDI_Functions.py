@@ -120,7 +120,7 @@ def printOverallNYRows():
             semiCleanedRowCells = semiCleanedRow.split(",")
             if semiCleanedRowCells[2].__contains__("NY") or fileCounter == 1:
                 if not semiCleanedRow.__contains__("****"):  # skip lines with insufficient data
-                    if semiCleanedRowCells[29].__contains__("OVERALL") or fileCounter == 1: #only includes rows with overall stratification
+                    if semiCleanedRowCells[29].__contains__("OVERALL") or fileCounter == 1: #only includes rows with overall stratification (not by race or gender)
                         if semiCleanedRowCells[6].__contains__("limitation") or fileCounter == 1: #only include rows which detail conditions that cause limitations on activity
                             rowSelection = (semiCleanedRowCells[0] + "," +  # YearStart
                                         semiCleanedRowCells[2] + "," +  # State
@@ -139,6 +139,52 @@ def printOverallNYRows():
                             print("Row "+str(rowCount)+": "+rowSelection)
                             rowCount = rowCount + 1
 
+
+def readIntoVarList():
+    rowCount = 0
+    objectList = []
+    fileCounter = 0
+    outputObjectIndexCounter = 0
+    with open(fileSelector, newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        for row in reader:
+            fileCounter = fileCounter + 1
+            semiCleanedRow = ', '.join(row)
+            semiCleanedRowCells = semiCleanedRow.split(",")
+            if semiCleanedRowCells[2].__contains__("NY") or fileCounter == 1:
+                if not semiCleanedRow.__contains__("****"):  # skip lines with insufficient data
+                    if semiCleanedRowCells[29].__contains__("OVERALL") or fileCounter == 1: #only includes rows with overall stratification (not by race or gender)
+                        if semiCleanedRowCells[6].__contains__("limitation") or fileCounter == 1: #only include rows which detail conditions that cause limitations on activity
+                            rowSelection = (semiCleanedRowCells[0] + "," +  # YearStart
+                                        semiCleanedRowCells[2] + "," +  # State
+                                        semiCleanedRowCells[5] + "," +  # Topic
+                                        semiCleanedRowCells[6] + "," +  # Question
+                                        semiCleanedRowCells[8] + "," +  # DataValueUnit
+                                        semiCleanedRowCells[9] + "," +  # DataValueType
+                                        semiCleanedRowCells[10] + "," +  # DataValue
+                                      # semiCleanedRowCells[11] + "," +  # DataValueAlt (this is the same as DataValue, what a waste of space)
+                                      # semiCleanedRowCells[12] + "," +  # DataValueFootnoteSymbol
+                                      # semiCleanedRowCells[13] + "," +  # DataValueFootnote
+                                        semiCleanedRowCells[14] + "," +  # LowConfidenceLimit
+                                        semiCleanedRowCells[15] + "," +  # HighConfidenceLimit
+                                        semiCleanedRowCells[16] + ",")  # StratificationCategory1
+                            objectList.append(cdiDatum(semiCleanedRowCells[0],semiCleanedRowCells[5],semiCleanedRowCells[6],
+                                                       semiCleanedRowCells[8],semiCleanedRowCells[9],semiCleanedRowCells[10],
+                                                       semiCleanedRowCells[14],semiCleanedRowCells[15],semiCleanedRowCells[16]))
+                            #print("Row "+str(rowCount)+": "+rowSelection)
+                            rowCount = rowCount + 1
+    return objectList
+
+class cdiDatum():
+    def __init__(self,YearStart, Topic, Question, DataValueUnit, DataValueType, DataValue, LowConfidenceLimit, HighConfidenceLimit):
+        self.yearStart = YearStart
+        self.topic = Topic
+        self.question = Question
+        self.dataValueUnit = DataValueUnit
+        self.dataValueType = DataValueType
+        self.dataValue = DataValue
+        self.lowConfidenceLimit = LowConfidenceLimit
+        self.highConfidenceLimit = HighConfidenceLimit
 
 #This function prints all rows with column values matching the function arguments
 def printAllMatchingRows(colNum, colVal):
